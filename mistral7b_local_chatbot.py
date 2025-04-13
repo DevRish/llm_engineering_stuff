@@ -23,13 +23,21 @@ chat_history = [
     {"role": "system", "content": "You are a helpful assistant."}
 ]
 
+# PROMPTING:
+# Mistral, LLaMA, Alpaca and ChatML all use same format for structured dialogues
+# Rules:
+# - role: "user" gets wrapped in "[INST]...[/INST]" (INST => Instruction)
+# - role: "system" gets wrapped in "<<SYS>>...<</SYS>>" (SYS => System)
+# - role: "assisstant" gets wrapped in nothing
 def format_chat_history(history):
     formatted = ""
     for turn in history:
         if turn["role"] == "user":
             formatted += f"[INST] {turn['content']} [/INST]\n"
         elif turn["role"] == "assistant":
-            formatted += f"{turn['content']}\n"
+            formatted += f" {turn['content']} \n"
+        elif turn["role"] == "system":
+            formatted += f"<<SYS>> {turn['content']} <</SYS>>\n"
     return formatted
 
 while True:
@@ -40,6 +48,8 @@ while True:
     chat_history.append({"role": "user", "content": user_input})
     prompt = format_chat_history(chat_history)
     response_text = ""
+
+    # print(f"\nPROMPT:\n{prompt}")
 
     rich_print(f"[bold magenta]Bot:[/bold magenta] ", end="")
 
