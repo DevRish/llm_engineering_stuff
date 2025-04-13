@@ -33,8 +33,8 @@ rich_print(gguf_path)
 # Load model
 llm = Llama(
     model_path=gguf_path,
-    n_ctx=32768, # for more tokens in output. Max value for the above downloaded model is 32768
-    n_gpu_layers=35,  # tweak if you run into CUDA OOM
+    n_ctx=32768, # higher value, better quality responses, more RAM consumed (32768 takes about 4GB RAM by itself)
+    n_gpu_layers=35,  # higher value, more model layers run on GPU instead of CPU (for 4GB VRAM GPU, 35 to 40 layers is fine)
     verbose=False
 )
 
