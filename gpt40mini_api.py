@@ -12,6 +12,9 @@
 
 # I paid and created this account only to try out prompt engineering and RAG in more detail, 
 # with better models, so that I can understand their potential better
+# local models were nice, but glitched a bit, and were not as good quality as the paid ones running on high infra servers (obviously)
+# Mistral was pretty nice, but I don't know yet how to prompt its local version properly
+# Using these standard libraries, like openai used here, prompting and defining prompts is easier and not manual
 
 from openai import OpenAI
 from dotenv import load_dotenv
