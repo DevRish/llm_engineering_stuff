@@ -1,38 +1,17 @@
 from llama_cpp import Llama
 from rich import print as rich_print
 from rich.prompt import Prompt
+from utils import download_model_from_hf
 
-from huggingface_hub import hf_hub_download
-import os
-
-def download_gguf_if_needed(model_id, filename, save_dir):
-    os.makedirs(save_dir, exist_ok=True)
-    local_file = os.path.join(save_dir, filename)
-
-    if not os.path.exists(local_file):
-        rich_print(f"Downloading {filename} from {model_id}...")
-        return hf_hub_download(
-            repo_id=model_id,
-            filename=filename,
-            local_dir=save_dir,
-            local_dir_use_symlinks=False
-        )
-    else:
-        rich_print("Model file already exists.")
-        return local_file
-
-# Example usage
-gguf_path = download_gguf_if_needed(
+model_path = download_model_from_hf(
     model_id="TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
     filename="mistral-7b-instruct-v0.1.Q4_K_M.gguf",
     save_dir="./models/mistral"
 )
 
-rich_print(gguf_path)
-
-# Load model
+# Load GGUF model using llama.cpp
 llm = Llama(
-    model_path=gguf_path,
+    model_path=model_path,
     n_ctx=32768, # higher value, better quality responses, more RAM consumed (32768 takes about 4GB RAM by itself)
     n_gpu_layers=35,  # higher value, more model layers run on GPU instead of CPU (for 4GB VRAM GPU, 35 to 40 layers is fine)
     verbose=False
