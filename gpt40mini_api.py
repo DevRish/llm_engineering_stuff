@@ -2,19 +2,13 @@
 # https://openai.com/api/pricing/
 
 # GPT 4o-mini is the cheapest at present, at $0.75 (0.15 input + 0.6 output) / 1M (10 Lakh)(1_000_000) tokens 
-# purchased $5 credits (about Rs 500) (minimum) => should give me more than 5_000_000 tokens (including input and output)
+# Minimum purchase => $5 credits => should give me more than 5_000_000 tokens (including input and output)
 # Track usage: https://platform.openai.com/usage
 
 # Example:
 # Input: "Tell me about yourself in one line" => 14 tokens
 # Output: "I'm an AI designed to assist and provide information on a wide range of topics." => 17 tokens
 # Total 31 tokens consumed in this interaction
-
-# I paid and created this account only to try out prompt engineering and RAG in more detail, 
-# with better models, so that I can understand their potential better
-# local models were nice, but glitched a bit, and were not as good quality as the paid ones running on high infra servers (obviously)
-# Mistral was pretty nice, but I don't know yet how to prompt its local version properly
-# Using these standard libraries, like openai used here, prompting and defining prompts is easier and not manual
 
 from openai import OpenAI
 from dotenv import load_dotenv
